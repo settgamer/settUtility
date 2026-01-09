@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="0; url=https://github.com/settgamer/settUtility/raw/main/settUtility.7z">
-    <title>settUtility - Download</title>
+    <title>settUtility</title>
     <style>
         :root {
             font-family: 'Courier New', Courier, monospace;
-            line-height: 1.4;
+            line-height: 1.6;
             font-weight: 400;
             color: #00ff00;
-            background-color: #0a0a0a;
+            background-color: #000000;
             font-synthesis: none;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
@@ -30,41 +30,50 @@
             place-items: center;
             min-width: 320px;
             min-height: 100vh;
-            background: #0a0a0a;
-            overflow: hidden;
+            background: #000000;
         }
 
         .console-container {
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #333;
-            border-radius: 4px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
-            padding: 20px;
+            background: #000000;
+            border: 2px solid #00ff00;
+            padding: 30px;
         }
 
         .console-header {
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: #ff9900;
-            font-size: 0.9em;
+            color: #ff6600;
+            font-size: 14px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
         }
 
         .console-output {
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         .line {
-            margin: 8px 0;
-            animation: fadeIn 0.3s ease-in;
+            margin: 10px 0;
         }
 
         .prompt {
             color: #00ff00;
+        }
+
+        .separator {
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .ascii-art {
+            color: #00ff00;
+            font-size: 11px;
+            line-height: 1.1;
+            margin: 20px 0;
+            white-space: pre;
         }
 
         .info {
@@ -75,10 +84,6 @@
             color: #00ff00;
         }
 
-        .warning {
-            color: #ff9900;
-        }
-
         .command {
             color: #00ccff;
         }
@@ -87,12 +92,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #ff6600;
         }
 
         .spinner {
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border: 2px solid rgba(0, 255, 0, 0.3);
             border-top: 2px solid #00ff00;
             border-radius: 50%;
@@ -104,18 +110,28 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .warning-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
         }
 
-        .blink {
+        .link-line {
+            color: #00ff00;
+        }
+
+        a {
+            color: #00ccff;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #00ff00;
+        }
+
+        .cursor {
+            color: #00ff00;
             animation: blink 1s step-start infinite;
         }
 
@@ -123,31 +139,15 @@
             50% { opacity: 0; }
         }
 
-        a {
-            color: #00ccff;
-            text-decoration: none;
-            border-bottom: 1px dotted #00ccff;
-            transition: all 0.2s;
-        }
-
-        a:hover {
+        .success-msg {
             color: #00ff00;
-            border-bottom-color: #00ff00;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-        }
-
-        .ascii-art {
-            color: #666;
-            font-size: 10px;
-            line-height: 1.2;
-            margin: 15px 0;
-            text-align: center;
+            margin-top: 15px;
         }
 
         @media (prefers-color-scheme: light) {
             :root {
                 color: #00ff00;
-                background-color: #0a0a0a;
+                background-color: #000000;
             }
         }
     </style>
@@ -155,52 +155,50 @@
 <body>
     <div class="console-container">
         <div class="console-header">
-            settUtility Console v1.0 - GitHub Pages Deployment
+            settUtility Console v1.0
         </div>
 
         <div class="console-output">
             <div class="line prompt">]]] settUtility Download Manager</div>
-            <div class="line">─────────────────────────────────────────────────────</div>
 
-            <div class="ascii-art">
-    ___  ___ _   _   _   _ _   _ _ _ _         
-   / __|/ _ \ |_| |_| | | | |_(_) (_) |_ _  _  
-   \__ \  __/ __| __| |_| |  _| | | |  _| || | 
-   |___/\___|_|  \__|\___/ \__|_|_|_|\__|\_, | 
-                                         |__/  
-            </div>
+            <div class="line separator">─────────────────────────────────────────────────────────────</div>
 
-            <div class="line info">[INFO] Inicializando sistema de download...</div>
-            <div class="line success">[OK] Arquivo localizado: settUtility.7z</div>
-            <div class="line command">[CMD] Executando: download_file(settUtility.7z)</div>
+            <div class="line info">[INFO] Initializing download system...</div>
+
+            <div class="line success">[OK] File located: settUtility.7z</div>
+
+            <div class="line command">[CMD] Executing: download_file(settUtility.7z)</div>
+
             <div class="line spinner-line">
                 <div class="spinner"></div>
-                <span class="warning">Aguarde... Iniciando download automaticamente</span>
+                <span>Please wait... Starting automatic download</span>
             </div>
-            <div class="line">─────────────────────────────────────────────────────</div>
+
+            <div class="warning-section">
+                <div class="line separator">─────────────────────────────────────────────────────────────</div>
+
+                <div class="line info">If the download does not start automatically:</div>
+
+                <div class="line link-line">
+                    > <a href="https://github.com/settgamer/settUtility/raw/main/settUtility.7z">Click here to force download</a>
+                </div>
+
+                <div class="line separator">─────────────────────────────────────────────────────────────</div>
+            </div>
+
             <div class="line">
-                <span class="info">Se o download não iniciar automaticamente:</span>
+                <span class="cursor">_</span>
             </div>
-            <div class="line">
-                <span class="prompt">></span> 
-                <a href="https://github.com/settgamer/settUtility/raw/main/settUtility.7z">Clique aqui para forçar download</a>
-            </div>
-            <div class="line">─────────────────────────────────────────────────────</div>
-            <div class="line prompt">
-                <span class="blink">_</span>
+
+            <div class="line success-msg" id="successMsg" style="display: none;">
+                [SUCCESS] Download started successfully!
             </div>
         </div>
     </div>
 
     <script>
-        // Força o download após 1 segundo
         setTimeout(function() {
-            const output = document.querySelector('.console-output');
-            const downloadLine = document.createElement('div');
-            downloadLine.className = 'line success';
-            downloadLine.textContent = '[SUCCESS] Download iniciado com sucesso!';
-            output.appendChild(downloadLine);
-
+            document.getElementById('successMsg').style.display = 'block';
             window.location.href = 'https://github.com/settgamer/settUtility/raw/main/settUtility.7z';
         }, 1000);
     </script>
