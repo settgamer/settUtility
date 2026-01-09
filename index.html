@@ -1,206 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://github.com/settgamer/settUtility/raw/main/settUtility.7z">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>settUtility</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/ekmas/cs16.css@main/css/cs16.min.css"
+    />
+
     <style>
-        :root {
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.6;
-            font-weight: 400;
-            color: #00ff00;
-            background-color: #000000;
-            font-synthesis: none;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+      body,
+      pre,
+      code {
+        font-family: "ArialPixel", monospace;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      .centered {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+      }
 
-        body {
-            margin: 0;
-            display: flex;
-            place-items: center;
-            min-width: 320px;
-            min-height: 100vh;
-            background: #000000;
-        }
+      .console-container {
+        width: 90%;
+        max-width: 900px;
+      }
 
-        .console-container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            background: #000000;
-            border: 2px solid #00ff00;
-            padding: 30px;
-        }
+      .code-block {
+        overflow-x: hidden;
+        margin-bottom: 15px;
+      }
 
-        .console-header {
-            color: #ff6600;
-            font-size: 14px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-        }
+      .code-block .inner {
+        position: relative;
+      }
 
-        .console-output {
-            font-size: 14px;
-            line-height: 1.8;
-        }
+      .code-block .inner pre {
+        background-color: #3e4637;
+        border: 1px solid;
+        border-color: #292c21 #8c9284 #8c9284 #292c21;
+        padding: 10px;
+        color: #d6ffd6;
+        font-size: 14px;
+        line-height: 1.25; /* espaçamento menor */
+        min-height: 220px;
+      }
 
-        .line {
-            margin: 10px 0;
-        }
+      .code-block .inner pre code {
+        white-space: pre-wrap;
+      }
 
-        .prompt {
-            color: #00ff00;
-        }
+      .prompt {
+        color: #d6ffd6;
+      }
+      .separator {
+        color: #5a6352;
+      }
+      .info {
+        color: #ffcc00;
+      }
+      .success {
+        color: #90ee90;
+      }
+      .cmd {
+        color: #87cefa;
+      }
+      .wait {
+        color: #ffb347;
+      }
 
-        .separator {
-            color: #333;
-            margin: 15px 0;
-        }
+      .cursor {
+        display: inline-block;
+        width: 8px;
+        animation: blink 1s step-start infinite;
+      }
 
-        .ascii-art {
-            color: #00ff00;
-            font-size: 11px;
-            line-height: 1.1;
-            margin: 20px 0;
-            white-space: pre;
+      @keyframes blink {
+        50% {
+          opacity: 0;
         }
+      }
 
-        .info {
-            color: #ffcc00;
-        }
+      /* Spinner old school “digitalizado” (feito com blocos) */
+      .spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-left: 6px;
+        position: relative;
+      }
 
-        .success {
-            color: #00ff00;
-        }
+      .spinner-dot {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #d6ffd6;
+        image-rendering: pixelated;
+      }
 
-        .command {
-            color: #00ccff;
-        }
+      /* 8 pontos em volta (tipo loader antigo) */
+      .spinner-dot:nth-child(1) {
+        top: 0;
+        left: 6px;
+      }
+      .spinner-dot:nth-child(2) {
+        top: 2px;
+        left: 10px;
+      }
+      .spinner-dot:nth-child(3) {
+        top: 6px;
+        left: 12px;
+      }
+      .spinner-dot:nth-child(4) {
+        top: 10px;
+        left: 10px;
+      }
+      .spinner-dot:nth-child(5) {
+        top: 12px;
+        left: 6px;
+      }
+      .spinner-dot:nth-child(6) {
+        top: 10px;
+        left: 2px;
+      }
+      .spinner-dot:nth-child(7) {
+        top: 6px;
+        left: 0;
+      }
+      .spinner-dot:nth-child(8) {
+        top: 2px;
+        left: 2px;
+      }
 
-        .spinner-line {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ff6600;
-        }
+      .spinner {
+        animation: spin-old 0.8s steps(8) infinite;
+      }
 
-        .spinner {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border: 2px solid rgba(0, 255, 0, 0.3);
-            border-top: 2px solid #00ff00;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+      @keyframes spin-old {
+        from {
+          transform: rotate(0deg);
         }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+      a {
+        color: #87cefa;
+        text-decoration: underline;
+      }
 
-        .warning-section {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #333;
-        }
+      a:hover {
+        color: #90ee90;
+      }
 
-        .link-line {
-            color: #00ff00;
-        }
-
-        a {
-            color: #00ccff;
-            text-decoration: underline;
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: #00ff00;
-        }
-
-        .cursor {
-            color: #00ff00;
-            animation: blink 1s step-start infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .success-msg {
-            color: #00ff00;
-            margin-top: 15px;
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                color: #00ff00;
-                background-color: #000000;
-            }
-        }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #d6ffd6;
+      }
     </style>
-</head>
-<body>
-    <div class="console-container">
-        <div class="console-header">
-            settUtility Console v1.0
+  </head>
+
+  <body>
+    <div class="centered">
+      <h1>settUtility</h1>
+
+      <div class="console-container">
+        <div class="code-block">
+          <div class="inner">
+            <pre><code id="console"></code></pre>
+          </div>
         </div>
-
-        <div class="console-output">
-            <div class="line prompt">]]] settUtility Download Manager</div>
-
-            <div class="line separator">─────────────────────────────────────────────────────────────</div>
-
-            <div class="line info">[INFO] Initializing download system...</div>
-
-            <div class="line success">[OK] File located: settUtility.7z</div>
-
-            <div class="line command">[CMD] Executing: download_file(settUtility.7z)</div>
-
-            <div class="line spinner-line">
-                <div class="spinner"></div>
-                <span>Please wait... Starting automatic download</span>
-            </div>
-
-            <div class="warning-section">
-                <div class="line separator">─────────────────────────────────────────────────────────────</div>
-
-                <div class="line info">If the download does not start automatically:</div>
-
-                <div class="line link-line">
-                    > <a href="https://github.com/settgamer/settUtility/raw/main/settUtility.7z">Click here to force download</a>
-                </div>
-
-                <div class="line separator">─────────────────────────────────────────────────────────────</div>
-            </div>
-
-            <div class="line">
-                <span class="cursor">_</span>
-            </div>
-
-            <div class="line success-msg" id="successMsg" style="display: none;">
-                [SUCCESS] Download started successfully!
-            </div>
-        </div>
+      </div>
     </div>
 
     <script>
-        setTimeout(function() {
-            document.getElementById('successMsg').style.display = 'block';
-            window.location.href = 'https://github.com/settgamer/settUtility/raw/main/settUtility.7z';
-        }, 1000);
+      const downloadUrl =
+        "https://github.com/settgamer/settUtility/raw/main/settUtility.7z";
+
+      // Script das linhas, em ordem
+      const scriptLines = [
+        { text: ">>> settUtility", className: "prompt" },
+        { text: "", className: "" },
+        { text: "[INFO] Initializing download..", className: "info" },
+        { text: "", className: "" },
+        { text: "[OK] settUtility.7z found.", className: "success" },
+        {
+          text: "[OK] Executing: start_download(settUtility.7z)..",
+          className: "success",
+        },
+        {
+          text: "[CMD] Executing: start_download(settUtility.7z)..",
+          className: "cmd",
+          withSpinner: true, // spinner ao lado desta linha
+        },
+        { text: "", className: "" },
+        {
+          text: "[WAIT] If download doesn't start, click here:",
+          className: "wait",
+        },
+        { text: "link", isLink: true },
+        { text: "", className: "" },
+      ];
+
+      const consoleEl = document.getElementById("console");
+      let downloadStarted = false;
+
+      function appendSpan(className = "") {
+        const span = document.createElement("span");
+        if (className) span.className = className;
+        consoleEl.appendChild(span);
+        return span;
+      }
+
+      // digita uma linha letra por letra
+      function typeLine(lineDef, delay) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            const { text, className, withSpinner, isLink } = lineDef;
+
+            // linha com link
+            if (isLink) {
+              const line = appendSpan("");
+              line.innerHTML =
+                '[WAIT] <a href="' + downloadUrl + '">settUtility.7z</a>';
+              consoleEl.appendChild(document.createTextNode("\n"));
+              return resolve();
+            }
+
+            const line = appendSpan(className);
+
+            let i = 0;
+            const interval = setInterval(() => {
+              line.textContent += text.charAt(i);
+              i++;
+
+              if (i >= text.length) {
+                clearInterval(interval);
+
+                // se essa linha tem spinner, adiciona ao lado e inicia download
+                if (withSpinner) {
+                  const spinner = document.createElement("span");
+                  spinner.className = "spinner";
+                  // cria dots pixelados
+                  for (let d = 0; d < 8; d++) {
+                    const dot = document.createElement("span");
+                    dot.className = "spinner-dot";
+                    spinner.appendChild(dot);
+                  }
+                  line.appendChild(spinner);
+
+                  if (!downloadStarted) {
+                    downloadStarted = true;
+                    // inicia o download aqui
+                    window.location.href = downloadUrl;
+
+                    // remove spinner depois de 7 segundos
+                    setTimeout(() => {
+                      spinner.remove();
+                    }, 4000);
+                  }
+                }
+
+                consoleEl.appendChild(document.createTextNode("\n"));
+                resolve();
+              }
+            }, 25); // velocidade da digitação
+          }, delay);
+        });
+      }
+
+      async function runConsole() {
+        let currentDelay = 0;
+
+        for (const line of scriptLines) {
+          await typeLine(line, currentDelay);
+          currentDelay += 90; // delay pequeno entre linhas
+        }
+
+        // cursor piscando no final
+        const cursorLine = appendSpan("");
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.textContent = "_";
+        cursorLine.appendChild(cursor);
+      }
+
+      runConsole();
     </script>
-</body>
+  </body>
 </html>
