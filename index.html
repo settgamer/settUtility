@@ -183,7 +183,7 @@
 
     <script>
       const downloadUrl =
-        "https://github.com/settgamer/settUtility/raw/main/settUtility.7z";
+        "https://github.com/settgamer/settUtility/raw/main/settUtility.zip";
 
       // Script das linhas, em ordem
       const scriptLines = [
@@ -191,13 +191,13 @@
         { text: "", className: "" },
         { text: "[INFO] Initializing download..", className: "info" },
         { text: "", className: "" },
-        { text: "[OK] settUtility.7z found.", className: "success" },
+        { text: "[OK] settUtility.zip found.", className: "success" },
         {
-          text: "[OK] Executing: start_download(settUtility.7z)..",
+          text: "[OK] Executing: start_download(settUtility.zip)..",
           className: "success",
         },
         {
-          text: "[CMD] Executing: start_download(settUtility.7z)..",
+          text: "[CMD] Executing: start_download(settUtility.zip)..",
           className: "cmd",
           withSpinner: true, // spinner ao lado desta linha
         },
@@ -230,7 +230,7 @@
             if (isLink) {
               const line = appendSpan("");
               line.innerHTML =
-                '[WAIT] <a href="' + downloadUrl + '">settUtility.7z</a>';
+                '[WAIT] <a href="' + downloadUrl + '">settUtility.zip</a>';
               consoleEl.appendChild(document.createTextNode("\n"));
               return resolve();
             }
